@@ -17,14 +17,18 @@ class Services{
     return dataSource[this.model].findByPk(id);
   }
 
+  async pegaUmRegistro(where) {
+    return dataSource[this.model].findOne({where: {...where}});
+  }
+
   async criaRegistro(dadosDoRegistro) {
     return dataSource[this.model].create(dadosDoRegistro);
   }
 
-  async atualizarRegistro(dadosAtualizados, id) {
+  async atualizarRegistro(dadosAtualizados, where) {
     const listadeRegistroAtualizados = dataSource[this.model].update(dadosAtualizados, {
       where: {
-        id: id
+        ...where
       }
     });
 
